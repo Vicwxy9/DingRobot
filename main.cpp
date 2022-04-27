@@ -3,21 +3,14 @@
 #include <QApplication>
 #include <QLocale>
 #include <QTranslator>
-
+#include <QGuiApplication>
+#include <QQmlApplicationEngine>
 int main(int argc, char *argv[])
 {
-    QApplication a(argc, argv);
-
-    QTranslator translator;
-    const QStringList uiLanguages = QLocale::system().uiLanguages();
-    for (const QString &locale : uiLanguages) {
-        const QString baseName = "DingRobot_" + QLocale(locale).name();
-        if (translator.load(":/i18n/" + baseName)) {
-            a.installTranslator(&translator);
-            break;
-        }
-    }
-    MainWindow w;
-    w.show();
-    return a.exec();
+    QGuiApplication DingRobot(argc, argv);
+    QQmlApplicationEngine engine;
+    engine.load(QUrl(QStringLiteral("qrc:/qml/DingRobot.qml")));
+    if (engine.rootObjects().isEmpty())
+        return -1;
+    return DingRobot.exec();
 }
