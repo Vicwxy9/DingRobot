@@ -1,6 +1,6 @@
 #include "mainwindow.h"
 
-#include "readfile.h"
+#include "readrobot.h"
 
 #include <QApplication>
 #include <QLocale>
@@ -10,7 +10,7 @@
 int main(int argc, char *argv[])
 {
     QGuiApplication DingRobot(argc, argv);
-    qmlRegisterType<ReadFile>("File", 1, 0, "ReadFile");
+    qmlRegisterType<ReadRobot>("File", 1, 0, "ReadFile");
     QQmlApplicationEngine engine;
     engine.load(QUrl(QStringLiteral("qrc:/qml/DingRobot.qml")));
     if (engine.rootObjects().isEmpty())

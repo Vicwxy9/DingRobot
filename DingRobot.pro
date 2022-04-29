@@ -12,11 +12,11 @@ CONFIG += c++17
 SOURCES += \
     main.cpp \
     mainwindow.cpp \
-    readfile.cpp
+    readrobot.cpp
 
 HEADERS += \
     mainwindow.h \
-    readfile.h
+    readrobot.h
 
 FORMS += \
     mainwindow.ui
