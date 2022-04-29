@@ -24,7 +24,7 @@ function finishCreation() {
                                                 ,cardColor1: "#6094ea"
                                                 ,cardColor2: "#f02fc2"
                                         });
-        if (sprite === null) {
+        if (card === null) {
             console.log("Error creating object");
         }
     } else if (component.status === Component.Error) {

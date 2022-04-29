@@ -11,10 +11,12 @@ CONFIG += c++17
 
 SOURCES += \
     main.cpp \
-    mainwindow.cpp
+    mainwindow.cpp \
+    readfile.cpp
 
 HEADERS += \
-    mainwindow.h
+    mainwindow.h \
+    readfile.h
 
 FORMS += \
     mainwindow.ui
@@ -32,4 +34,7 @@ else: unix:!android: target.path = /opt/$${TARGET}/bin
 RESOURCES += \
     res/js.qrc \
     res/qml.qrc
+
+DISTFILES += \
+    robot.json
 

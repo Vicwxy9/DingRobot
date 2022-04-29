@@ -2,6 +2,8 @@ import QtQuick
 import QtQuick.Window
 import QtQuick.Controls
 import Qt5Compat.GraphicalEffects
+
+import File
 import "../js/Main.js" as Mainjs
 
 Window {
@@ -306,27 +308,35 @@ Window {
                 }
             }
         }
-        Card{
-            cardX:10
-            cardY:50
-            cardWidth:260
-            cardHeight:140
-            cardName: "Name"
-            cardToken: "d2419902243663cc0681c9ebfa7e23c7ec2f4c158ae4c5d4c04c7940035a63a5"
-            cardColor1: "#5ae6db"
-            cardColor2: "#88c7eb"
+
+        ReadFile {
+            id: content
+            filename: "./robot.json"
+            Component.onCompleted: {
+                getFileContent()
+            }
         }
-        Card{
-            cardX:290
-            cardY:50
-            cardWidth:260
-            cardHeight:140
-            cardName: "Name"
-            cardToken: "d2419902243663cc0681c9ebfa7e23c7ec2f4c158ae4c5d4c04c7940035a63a5"
-            cardColor1: "#6094ea"
-            cardColor2: "#f02fc2"
-        }
-        Component.onCompleted: Mainjs.createCard()
+//        Card{
+//            cardX:10
+//            cardY:50
+//            cardWidth:260
+//            cardHeight:140
+//            cardName: "Name"
+//            cardToken: "d2419902243663cc0681c9ebfa7e23c7ec2f4c158ae4c5d4c04c7940035a63a5"
+//            cardColor1: "#5ae6db"
+//            cardColor2: "#88c7eb"
+//        }
+//        Card{
+//            cardX:290
+//            cardY:50
+//            cardWidth:260
+//            cardHeight:140
+//            cardName: "Name"
+//            cardToken: "d2419902243663cc0681c9ebfa7e23c7ec2f4c158ae4c5d4c04c7940035a63a5"
+//            cardColor1: "#6094ea"
+//            cardColor2: "#f02fc2"
+//        }
+//        Component.onCompleted: Mainjs.createCard()
     }
 
     DropShadow {
