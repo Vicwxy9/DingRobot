@@ -9,12 +9,49 @@ import "../js/Main.js" as Mainjs
 Window {
     id: mainWindow
     visible: true
-    width: 670
+    width: 730
     height: 670
     color: "#00000000"
     flags: Qt.FramelessWindowHint | Qt.Window
 
     property bool ismax : false
+    property int bw: 3
+    property var cards: []
+
+    MouseArea {
+        anchors.fill: parent
+        hoverEnabled: true
+        cursorShape: {
+            const p = Qt.point(mouseX, mouseY);
+            const b = bw + 90;
+            if (p.x < b && p.y < b) return Qt.SizeFDiagCursor;
+            if (p.x >= width - b && p.y >= height - b) return Qt.SizeFDiagCursor;
+            if (p.x >= width - b && p.y < b) return Qt.SizeBDiagCursor;
+            if (p.x < b && p.y >= height - b) return Qt.SizeBDiagCursor;
+            if (p.x < b || p.x >= width - b) return Qt.SizeHorCursor;
+            if (p.y < b || p.y >= height - b) return Qt.SizeVerCursor;
+        }
+        acceptedButtons: Qt.NoButton
+    }
+
+    DragHandler {
+        id: resizeHandler
+        grabPermissions: TapHandler.TakeOverForbidden
+        target: null
+        onActiveChanged: if (active) {
+                             const p = resizeHandler.centroid.position;
+                             const b = bw + 80;
+                             let e = 0;
+                             if (p.x < b) { e |= Qt.LeftEdge }
+                             if (p.x >= width - b) { e |= Qt.RightEdge }
+                             if (p.y < b) { e |= Qt.TopEdge }
+                             if (p.y >= height - b) { e |= Qt.BottomEdge }
+                             mainWindow.startSystemResize(e);
+//                             for(var i=0;i<cards.length;i++){
+//                                cards[i].x=mainWindow.width*0.00684+i*260+mainWindow.width*0.0273*(i+1)
+//                             }
+                         }
+    }
 
     Rectangle {
         id: mainArea
@@ -314,8 +351,11 @@ Window {
             json: "robot.json"
             Component.onCompleted: {
                 getRobots();
+                var cardW=260;
+                var cardH=130;
                 for(var i=0;i<robotLength;i++){
-                    Mainjs.createCard(10+i*280,50,260,140,getRobotName(i),getRobotToken(i),"#6094ea","#f02fc2");
+                    var Onecard=Mainjs.createCard(mainWindow.width*0.00684+i*260+mainWindow.width*0.0273*(i+1),40+15,cardW,cardH,getRobotName(i),getRobotToken(i),"#6094ea","#f02fc2",i);
+                    mainWindow.cards.push(Onecard)
                 }
             }
         }
@@ -332,3 +372,6 @@ Window {
         source: mainArea
     }
 }
+
+
+
